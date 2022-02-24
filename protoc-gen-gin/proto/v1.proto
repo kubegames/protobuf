@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option go_package = "github.com/kubegames/protoc-gen-go-gin/proto";
+
+package product.app.v1;
+
+import "google/api/annotations.proto";
+import "proto/v2/v2.proto";
+
+// blog service is a blog demo
+service BlogService {
+	rpc GetArticles(GetArticlesReq) returns (GetArticlesResp) {
+		option (google.api.http) = {
+			get: "/v1/articles"
+			additional_bindings {
+				get: "/v1/author/{author_id}/articles"
+			}
+		};
+	}
+
+	rpc CreateArticle(Article) returns (Article) {
+		option (google.api.http) = {
+			post: "/v1/author/{author_id}/articles"
+		};
+	}
+}
+
+
+// blog service is a blog demo
+service Blog2Service {
+	rpc Get2Articles(GetArticlesReq) returns (GetArticlesResp) {
+		option (google.api.http) = {
+			get: "/v2/articles"
+			additional_bindings {
+				get: "/v2/author/{author_id}/articles"
+			}
+		};
+	}
+
+	rpc Create2Article(Article) returns (Article) {
+		option (google.api.http) = {
+			post: "/v2/author/{author_id}/articles"
+		};
+	}
+}

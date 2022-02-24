@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option go_package = "github.com/kubegames/protoc-gen-gin/proto/v2";
+
+message GetArticlesReq {
+	// @inject_tag: form:"title"
+	string title = 1;
+
+	// @inject_tag: form:"page"
+	int32 page = 2;
+
+	// @inject_tag: form:"page_size"
+	int32 page_size = 3;
+
+	// @inject_tag: form:"author_id" uri:"author_id"
+	int32 author_id = 4;
+}
+
+message GetArticlesResp {
+	int64 total = 1;
+	repeated Article articles = 2;
+}
+
+message Article {
+	string title  = 1;
+	string content = 2;
+	// @inject_tag: form:"author_id" uri:"author_id"
+	int32 author_id = 3;
+}
